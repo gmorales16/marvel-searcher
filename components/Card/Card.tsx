@@ -1,12 +1,12 @@
-"use client";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
+import { CiStar } from "react-icons/ci";
 
 interface CardProps {
   image: string;
   title: string;
 }
 
-export default function Card({ image, title }: CardProps) {
+export function Card({ image, title }: CardProps) {
   const CardContainer = styled.div`
     width: 256px;
     height: 380px;
@@ -19,14 +19,26 @@ export default function Card({ image, title }: CardProps) {
   const CardTitle = styled.h1`
     color: #ffffff;
     position: relative;
-    padding-top: 20rem;
-    padding-left: 1.5rem;
-    display: flex;
+    top: 17rem;
+    text-align: center;
     font-size: 19px;
   `;
+
+  const StarIcon = styled.button<{ $clickIcon?: boolean }>`
+    border: none;
+    background-color: transparent;
+    color: ${(props) => (props.$clickIcon ? "yellow" : "#ffffff")};
+    position: relative;
+    top: 1rem;
+    left: 12.5rem;
+  `;
+
   return (
     <>
       <CardContainer>
+        <StarIcon>
+          <CiStar size={30}></CiStar>
+        </StarIcon>
         <CardTitle>{title}</CardTitle>
       </CardContainer>
     </>
