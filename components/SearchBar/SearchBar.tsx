@@ -1,5 +1,4 @@
 import { css, styled } from "styled-components";
-import Star from "../StarButton/StarButton";
 import InputSearch from "../InputSearch/InputSearch";
 import Logo from "../Logo/Logo";
 export function SearchBar() {
@@ -29,7 +28,6 @@ export function SearchBar() {
         <Logo />
         <HrVertical />
         <InputSearch />
-        <Star />
         <HrVertical $primary />
       </SearchBar>
     </div>
