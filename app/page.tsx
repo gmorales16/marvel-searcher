@@ -1,21 +1,17 @@
 "use client";
 import { SearchBar } from "../components/SearchBar/SearchBar";
-import { Card } from "../components/Card/Card";
+import { MainComponent } from "../components/MainComponent/MainComponent";
+import apiContext from "../contexts/context";
+import apiUtils from "../utils/apiUtils";
 
 export default function Home() {
+  const { publicKey, timestamp, hash } = apiUtils;
   return (
     <>
-      <header>
+      <apiContext.Provider value={{ publicKey, timestamp, hash }}>
         <SearchBar />
-      </header>
-      <body>
-        <Card
-          image={
-            "https://images.everyeye.it/img-notizie/spider-man-across-the-spider-verse-amore-gwen-miles-ci-tensione-v3-621097-1200x1200.webp"
-          }
-          title={"Spider-Woman (stacy)"}
-        ></Card>
-      </body>
+        <MainComponent></MainComponent>
+      </apiContext.Provider>
     </>
   );
 }
