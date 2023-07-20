@@ -1,17 +1,21 @@
 "use client";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import { MainComponent } from "../components/MainComponent/MainComponent";
-import apiContext from "../contexts/context";
+import { apiContext, nameCharacterContext } from "../contexts/context";
 import apiUtils from "../utils/apiUtils";
+import { useState } from "react";
 
 export default function Home() {
   const { publicKey, timestamp, hash } = apiUtils;
+  const [characterName, setCharacterName] = useState("");
   return (
     <>
-      <apiContext.Provider value={{ publicKey, timestamp, hash }}>
-        <SearchBar />
-        <MainComponent></MainComponent>
-      </apiContext.Provider>
+      <nameCharacterContext.Provider value={characterName}>
+        <apiContext.Provider value={{ publicKey, timestamp, hash }}>
+          <SearchBar setCharacterName={setCharacterName}></SearchBar>
+          <MainComponent />
+        </apiContext.Provider>
+      </nameCharacterContext.Provider>
     </>
   );
 }

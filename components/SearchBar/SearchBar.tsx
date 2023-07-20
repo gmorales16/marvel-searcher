@@ -1,35 +1,69 @@
 import { css, styled } from "styled-components";
-import InputSearch from "../InputSearch/InputSearch";
+
+import { CiSearch, CiStar } from "react-icons/ci";
 import Logo from "../Logo/Logo";
-export function SearchBar() {
-  const SearchBar = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 10px;
-  `;
-  const HrVertical = styled.hr<{ $primary?: boolean }>`
-    height: 50px;
-    width: 3px;
-    border-width: 0;
-    margin-left: 20px;
-    background-color: #f0f0f0;
-    color: #f0f0f0;
-    ${(props) =>
-      props.$primary &&
-      css`
-        margin-right: 100px;
-      `};
-  `;
+import { useContext, useState } from "react";
+import { nameCharacterContext } from "@/contexts/context";
+
+const Search = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+`;
+const HrVertical = styled.hr<{ $primary?: boolean }>`
+  height: 50px;
+  width: 3px;
+  border-width: 0;
+  margin-left: 20px;
+  background-color: #f0f0f0;
+  color: #f0f0f0;
+  ${(props) =>
+    props.$primary &&
+    css`
+      margin-right: 100px;
+    `};
+`;
+const Input = styled.input`
+  width: 100%;
+  height: 30px;
+  border: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+  outline: none;
+  opacity: 0.5;
+`;
+
+const IconSearch = styled.div`
+  margin-left: 30px;
+`;
+const IconStar = styled.a`
+  color: black;
+  :hover {
+    color: yellow;
+    cursor: pointer;
+  }
+`;
+export function SearchBar({ setCharacterName }: any) {
+  const handleChange = (event: any) => {
+    setCharacterName(event.target.value);
+  };
+
   return (
     <div>
-      <SearchBar>
+      <Search>
         <Logo />
         <HrVertical />
-        <InputSearch />
+        <IconSearch>
+          <CiSearch opacity={0.5} size={30} />
+        </IconSearch>
+        <Input placeholder="Buscar" onChange={handleChange}></Input>
+        <IconStar href="/">
+          <CiStar opacity={0.5} size={50}></CiStar>
+        </IconStar>
         <HrVertical $primary />
-      </SearchBar>
+      </Search>
     </div>
   );
 }
