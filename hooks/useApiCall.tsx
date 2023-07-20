@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 
-export function useApiCall(url: any) {
+export function useApiCall({ url, condition }: any) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchUrl = async () => {
-      try {
+      if (condition) {
         const response = await fetch(url);
         const jsonData = await response.json();
         setData(jsonData.data.results);
-      } catch (error) {
-        console.error(error);
+      } else {
+        setData([]);
       }
     };
     fetchUrl();
-  }, [url]);
+  }, [url, condition]);
 
   return data;
 }
