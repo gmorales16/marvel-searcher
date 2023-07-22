@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/_documents.js",
-    "app/registry.js"
+    "app/registry.js",
+    "pages/comic.tsx"
   ],
   "exclude": ["node_modules"]
 }
