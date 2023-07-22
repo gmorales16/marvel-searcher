@@ -1,20 +1,45 @@
 import { useEffect, useState } from "react";
 
-export function useApiCall({ url, condition }: any) {
-  const [data, setData] = useState([]);
+type Condition = boolean;
+
+interface ApiResponse {
+  data: {
+    results: any[]; // Replace 'any[]' with the appropriate type of data you expect from the API response.
+  };
+}
+
+interface ApiCallParams {
+  url: string;
+  condition: Condition;
+}
+
+export function useApiCall({ url, condition }: ApiCallParams) {
+  const [data, setData] = useState<any[]>([]);
+  const cachedData = useState<{ [key: string]: any[] }>({})[0];
 
   useEffect(() => {
-    const fetchUrl = async () => {
+    const fetchData = async () => {
       if (condition) {
-        const response = await fetch(url);
-        const jsonData = await response.json();
-        setData(jsonData.data.results);
+        // Check if data for the current URL is already cached
+        if (cachedData[url]) {
+          setData(cachedData[url]); // Use cached data if available
+        } else {
+          const response = await fetch(url);
+          const jsonData: ApiResponse = await response.json();
+          setData(jsonData.data.results);
+
+          // Update the cached data with the new data
+          cachedData[url] = jsonData.data.results;
+        }
       } else {
+        // If condition is false, clear the cached data for the current URL
         setData([]);
+        cachedData[url] = [];
       }
     };
-    fetchUrl();
-  }, [url, condition]);
+
+    fetchData();
+  }, [url, condition, cachedData]);
 
   return data;
 }

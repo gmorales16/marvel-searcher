@@ -1,8 +1,7 @@
 import { css, styled } from "styled-components";
-
 import { CiSearch, CiStar } from "react-icons/ci";
 import Logo from "../Logo/Logo";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { nameCharacterContext } from "@/contexts/context";
 
 const Search = styled.div`
@@ -12,6 +11,7 @@ const Search = styled.div`
   background-color: white;
   padding: 10px;
 `;
+
 const HrVertical = styled.hr<{ $primary?: boolean }>`
   height: 50px;
   width: 3px;
@@ -25,6 +25,7 @@ const HrVertical = styled.hr<{ $primary?: boolean }>`
       margin-right: 100px;
     `};
 `;
+
 const Input = styled.input`
   width: 100%;
   height: 30px;
@@ -38,6 +39,7 @@ const Input = styled.input`
 const IconSearch = styled.div`
   margin-left: 30px;
 `;
+
 const IconStar = styled.a`
   color: black;
   :hover {
@@ -45,9 +47,24 @@ const IconStar = styled.a`
     cursor: pointer;
   }
 `;
+
 export function SearchBar({ setCharacterName }: any) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    // Define a delay time (in milliseconds) for the debounce
+    const delay = 600;
+
+    // Set up a timer to execute the handleChange function after the delay
+    const timer = setTimeout(() => {
+      setCharacterName(searchQuery);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const handleChange = (event: any) => {
-    setCharacterName(event.target.value);
+    setSearchQuery(event.target.value);
   };
 
   return (
