@@ -3,6 +3,7 @@ import { CiStar } from "react-icons/ci";
 interface CardProps {
   image: string;
   title: string;
+  click: any;
 }
 const CardContainer = styled.div<{ $backgroundImage?: string }>`
   position: relative;
@@ -31,10 +32,10 @@ const StarIcon = styled.button<{ $clickIcon?: boolean }>`
   top: 1rem;
   left: 18rem;
 `;
-export function Card({ image, title }: CardProps) {
+export function Card({ image, title, click }: CardProps) {
   return (
     <>
-      <CardContainer $backgroundImage={image}>
+      <CardContainer onClick={click} $backgroundImage={image}>
         <StarIcon>
           <CiStar size={40}></CiStar>
         </StarIcon>

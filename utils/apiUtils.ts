@@ -1,7 +1,7 @@
 const apiUtils = {
-  publicKey: "2b13a686a43c563e99006fd2a8af1363",
+  publicKey: "b14af072876cabcfd0f832c052c5cb08",
   timestamp: "1000",
-  hash: "8daa848a6beef96a71f7b1964a6f2a52",
+  hash: "cdbfa2baa320348eb3290389306f91e8",
 };
 
 export default apiUtils;
