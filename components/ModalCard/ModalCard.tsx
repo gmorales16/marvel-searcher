@@ -49,11 +49,23 @@ interface ModalCardProps {
   url: string;
   title: string;
   description: string;
+  id: Number;
 }
 
-export default function ModalCard({ url, title, description }: ModalCardProps) {
+export default function ModalCard({
+  url,
+  title,
+  description,
+  id,
+}: ModalCardProps) {
+  // Set ID Comic in LocalStorage
+
+  const handleClickCard = () => {
+    localStorage.setItem("idComic", String(id));
+    window.location.href = `/comic`;
+  };
   return (
-    <Card>
+    <Card onClick={handleClickCard}>
       <CardImage src={url} alt="Card Image" />
       <CardContent>
         <CardHeader>

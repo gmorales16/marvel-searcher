@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import ModalCard from "../ModalCard/ModalCard";
-import { useApiCall } from "../../hooks/useApiCall";
 import { apiContext } from "@/contexts/context";
 
 const ModalWrapper = styled.div`
@@ -105,6 +104,7 @@ const Modal = ({ onClose, comicsArray, title }: ModalProps) => {
               url={comic.thumbnail.path + "." + comic.thumbnail.extension}
               title={comic.title}
               description={comic.description}
+              id={comic.id}
             />
           ))}
         </ModalCardContainer>
