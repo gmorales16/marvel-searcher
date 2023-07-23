@@ -13,11 +13,6 @@ interface IFilteredCharactersComic {
   items: [];
 }
 
-interface IFilteredCharactersItem {
-  resourceURI: string;
-  name: string;
-}
-
 export function useCharactersData(url: string) {
   const { publicKey, timestamp, hash }: any = useContext(apiContext);
   const characterName = useContext(nameCharacterContext);
