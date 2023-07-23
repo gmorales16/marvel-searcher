@@ -1,9 +1,12 @@
 import { css, styled } from "styled-components";
 import { CiStar } from "react-icons/ci";
+import { useEffect, useState } from "react";
 interface CardProps {
   image: string;
   title: string;
   click: any;
+  id: string;
+  isSelected: any;
 }
 const CardContainer = styled.div<{ $backgroundImage?: string }>`
   position: relative;
@@ -31,12 +34,43 @@ const StarIcon = styled.button<{ $clickIcon?: boolean }>`
   position: relative;
   top: 1rem;
   left: 18rem;
+  cursor: pointer;
 `;
-export function Card({ image, title, click }: CardProps) {
+export function Card({ image, title, click, id, isSelected }: CardProps) {
+  interface FavoriteItem {
+    id: string;
+    image: string;
+    title: string;
+  }
+
+  const isIdSaved = JSON.parse(localStorage.getItem("favorite") || "[]").some(
+    (item: FavoriteItem) => item.id === id
+  );
+  const [clickIcon, setClickIcon] = useState(isIdSaved);
+
+  const handleClickStar = () => {
+    setClickIcon(!clickIcon);
+    const favoriteItems: FavoriteItem[] = JSON.parse(
+      localStorage.getItem("favorite") || "[]"
+    );
+
+    const index = favoriteItems.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      favoriteItems.splice(index, 1);
+    } else {
+      favoriteItems.push({ id, image, title });
+    }
+
+    localStorage.setItem("favorite", JSON.stringify(favoriteItems));
+  };
+
+  useEffect(() => {
+    setClickIcon(isIdSaved);
+  }, [isIdSaved]);
   return (
     <>
       <CardContainer onClick={click} $backgroundImage={image}>
-        <StarIcon>
+        <StarIcon onClick={handleClickStar} $clickIcon={clickIcon}>
           <CiStar size={40}></CiStar>
         </StarIcon>
         <CardTitle>{title}</CardTitle>
