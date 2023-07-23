@@ -76,7 +76,7 @@ export function SearchBar({ setCharacterName }: any) {
           <CiSearch opacity={0.5} size={30} />
         </IconSearch>
         <Input placeholder="Buscar" onChange={handleChange}></Input>
-        <IconStar href="/">
+        <IconStar href="/favorite">
           <CiStar opacity={0.5} size={50}></CiStar>
         </IconStar>
         <HrVertical $primary />

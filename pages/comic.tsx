@@ -3,13 +3,12 @@ import { SearchBar } from "../components/SearchBar/SearchBar";
 import ComicContainer from "../components/ComicContainer/ComicContainer";
 import "../app/globals.css";
 import { useApiCall } from "@/hooks/useApiCall";
-import { apiContext } from "@/contexts/context";
+
 import formatDateToCustomFormat from "../utils/formatDateutils";
 
 export default function Comic() {
   const [searchComic, setSearchComic] = useState("");
   const [id, setId] = useState<string | null>(null);
-  const { publicKey, timestamp, hash }: any = useContext(apiContext);
 
   useEffect(() => {
     // Perform localStorage action
