@@ -17,6 +17,12 @@ const CardContainer = styled.div<{ $backgroundImage?: string }>`
   background-repeat: no-repeat;
   background-image: url(${(props) => props.$backgroundImage});
   border-radius: 5px;
+
+  @media (max-width: 768px) {
+    width: 85%;
+    height: 400px;
+    left: 2rem;
+  }
 `;
 
 const CardTitle = styled.h1`
@@ -25,6 +31,10 @@ const CardTitle = styled.h1`
   top: 23rem;
   text-align: center;
   font-size: 19px;
+
+  @media (max-width: 768px) {
+    top: 20rem;
+  }
 `;
 
 const StarIcon = styled.button<{ $clickIcon?: boolean }>`
@@ -35,8 +45,14 @@ const StarIcon = styled.button<{ $clickIcon?: boolean }>`
   top: 1rem;
   left: 18rem;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    left: 13rem;
+    position: absolute;
+    top: 1rem;
+  }
 `;
-export function Card({ image, title, click, id, isSelected }: CardProps) {
+export function Card({ image, title, click, id }: CardProps) {
   interface FavoriteItem {
     id: string;
     image: string;

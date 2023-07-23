@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import ComicContainer from "../components/ComicContainer/ComicContainer";
 import "../app/globals.css";
@@ -21,7 +21,7 @@ export default function Comic() {
     url: `https://gateway.marvel.com/v1/public/comics/${id}?ts=1000&apikey=2b13a686a43c563e99006fd2a8af1363&hash=8daa848a6beef96a71f7b1964a6f2a52`,
   });
 
-  // Filtrar los creadores según sus roles
+  // Filter creators based on their roles
   let writer = "";
   let penciler = "";
   let coverArtist = "";

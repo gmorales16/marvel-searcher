@@ -21,6 +21,11 @@ const ModalContent = styled.div`
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    width: 85%;
+    padding: 15px;
+  }
 `;
 
 const ModalTitle = styled.h2`
@@ -40,7 +45,7 @@ const CloseButton = styled.button`
 `;
 
 const ModalCardContainer = styled.div`
-  max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+  max-height: 400px;
   overflow-y: auto;
 `;
 
@@ -53,7 +58,7 @@ interface ModalProps {
 const Modal = ({ onClose, comicsArray, title }: ModalProps) => {
   const [comicUrls, setComicUrls] = useState<string[]>([]);
   const { publicKey, timestamp, hash }: any = useContext(apiContext);
-  const [comicsData, setComicsData] = useState<any[]>([]); // Estado para almacenar los datos de los cómics
+  const [comicsData, setComicsData] = useState<any[]>([]); // State to store comics data
 
   // Generate URLs for comics
   useEffect(() => {

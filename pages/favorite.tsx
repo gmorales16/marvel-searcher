@@ -1,9 +1,7 @@
-import React, { use, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchBar } from "../components/SearchBar/SearchBar";
-import Modal from "../components/Modal/Modal";
 import { styled } from "styled-components";
 import "../app/globals.css";
-import { useCharactersData } from "@/hooks/useCharactersData";
 import { Card } from "@/components/Card/Card";
 
 const MainContainer = styled.div`
@@ -11,6 +9,11 @@ const MainContainer = styled.div`
   margin-top: 6rem;
   margin-bottom: 6rem;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ContainerCard = styled.div`
@@ -23,12 +26,18 @@ const ContainerCard = styled.div`
   justify-items: stretch;
   width: 50%;
   height: 50%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 80%;
+  }
 `;
 
 export default function Favorite() {
   const [favoriteSearch, setFavoriteSearch] = useState("");
   const [favoriteObj, setFavoriteObj] = useState<string[]>([]);
-  const [selectedCards, setSelectedCards] = useState<string[]>([]); // Nuevo estado para almacenar las tarjetas seleccionadas
+  const [selectedCards, setSelectedCards] = useState<string[]>([]); // New state to store the selected cards
 
   useEffect(() => {
     // Perform localStorage action
@@ -42,18 +51,17 @@ export default function Favorite() {
       title={title}
       click={() => handleClickModal(id)}
       id={id}
-      isSelected={selectedCards.includes(id)} // Pasamos un prop isSelected que indica si la tarjeta está seleccionada
+      isSelected={selectedCards.includes(id)} // We pass an isSelected prop that indicates whether the card is selected
     />
   ));
 
   const handleClickModal = (id: any) => {
     if (selectedCards.includes(id)) {
-      // Si la tarjeta ya está seleccionada, la quitamos del estado de selectedCards
+      //If the card is already selected, we remove it from the selectedCards state if we don't add it
       setSelectedCards((prevSelected) =>
         prevSelected.filter((cardId) => cardId !== id)
       );
     } else {
-      // Si la tarjeta no está seleccionada, la agregamos al estado de selectedCards
       setSelectedCards((prevSelected) => [...prevSelected, id]);
     }
   };

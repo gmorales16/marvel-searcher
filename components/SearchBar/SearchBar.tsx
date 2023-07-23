@@ -1,8 +1,7 @@
 import { css, styled } from "styled-components";
 import { CiSearch, CiStar } from "react-icons/ci";
 import Logo from "../Logo/Logo";
-import { useContext, useState, useEffect } from "react";
-import { nameCharacterContext } from "@/contexts/context";
+import { useState, useEffect } from "react";
 
 const Search = styled.div`
   display: flex;
@@ -10,6 +9,11 @@ const Search = styled.div`
   align-items: center;
   background-color: white;
   padding: 10px;
+
+  @media (max-width: 1200px) {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 const HrVertical = styled.hr<{ $primary?: boolean }>`
@@ -24,6 +28,10 @@ const HrVertical = styled.hr<{ $primary?: boolean }>`
     css`
       margin-right: 100px;
     `};
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;
 
 const Input = styled.input`
@@ -34,10 +42,18 @@ const Input = styled.input`
   margin-right: 20px;
   outline: none;
   opacity: 0.5;
+
+  @media (max-width: 1200px) {
+    margin: 10px 0;
+  }
 `;
 
 const IconSearch = styled.div`
   margin-left: 30px;
+
+  @media (max-width: 768px) {
+    margin: 10px 0;
+  }
 `;
 
 const IconStar = styled.a`
@@ -45,6 +61,10 @@ const IconStar = styled.a`
   :hover {
     color: yellow;
     cursor: pointer;
+  }
+
+  @media (max-width: 1200px) {
+    margin: 10px 0;
   }
 `;
 

@@ -1,4 +1,3 @@
-import React, { useContext, useState } from "react";
 import { styled } from "styled-components";
 import Modal from "../Modal/Modal";
 import { useCharactersData } from "../../hooks/useCharactersData";
@@ -8,6 +7,10 @@ const MainContainer = styled.div`
   margin-top: 6rem;
   margin-bottom: 6rem;
   justify-content: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ContainerCard = styled.div`
@@ -20,6 +23,12 @@ const ContainerCard = styled.div`
   justify-items: stretch;
   width: 50%;
   height: 50%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 80%;
+  }
 `;
 
 export function MainComponent() {

@@ -4,23 +4,32 @@ import { CiStar } from "react-icons/ci";
 
 const Card = styled.div`
   display: flex;
+  flex-direction: column;
   max-width: 600px;
   margin: 10px;
   padding: 10px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const CardImage = styled.img`
-  flex: 0 0 200px; /* Establecemos un ancho fijo para la imagen */
+  flex: 0 0 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
-  margin-right: 10px; /* Agregamos un margen a la derecha para separar la imagen */
-`;
+  margin-bottom: 10px;
 
+  @media (min-width: 768px) {
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+`;
 const CardContent = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1; /* El contenido ocupará el espacio disponible restante */
+  flex: 1;
 `;
 
 const CardHeader = styled.div`
