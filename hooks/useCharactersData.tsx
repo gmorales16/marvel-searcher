@@ -39,7 +39,7 @@ export function useCharactersData(url: string) {
       title={name}
       click={() => handleClickModal(id)}
       id={id}
-      isSelected={""}
+      isSelected={false}
     />
   ));
 
