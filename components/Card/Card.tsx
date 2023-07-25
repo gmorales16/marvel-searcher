@@ -6,7 +6,7 @@ export interface CardProps {
   title: string;
   click: any;
   id: string;
-  isSelected: string;
+  isSelected: boolean;
 }
 const CardContainer = styled.div<{ $backgroundImage?: string }>`
   position: relative;
