@@ -63,9 +63,17 @@ const Modal = ({ onClose, comicsArray, title }: ModalProps) => {
   // Generate URLs for comics
   useEffect(() => {
     const uniqueUrls = Array.from(
-      new Set(comicsArray.map(({ resourceURI }) => resourceURI))
+      new Set(
+        comicsArray.map(
+          ({ resourceURI }: { resourceURI: string }) => resourceURI
+        )
+      )
     );
-    setComicUrls(uniqueUrls);
+
+    const httpsUniqueUrls: string[] = uniqueUrls.map((url: string) =>
+      url.replace("http:", "https:")
+    );
+    setComicUrls(httpsUniqueUrls);
   }, [comicsArray]);
 
   useEffect(() => {
