@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ComicContainer/> renders ComicContainer Component 1`] = `
+<DocumentFragment>
+  <div
+    class="ComicContainer__Container-sc-16s3lk1-0 kBKVGw"
+  >
+    <img
+      alt="Comic Image"
+      class="ComicContainer__Image-sc-16s3lk1-1 iGLqoP"
+      src="Hi im Iron Man Link Image"
+    />
+    <div
+      class="ComicContainer__InfoContainer-sc-16s3lk1-2 bqgqRw"
+    >
+      <h1
+        class="ComicContainer__Title-sc-16s3lk1-3 kAzrHJ"
+        data-testid="comic-title"
+      >
+        Iron Man
+      </h1>
+      <h3
+        class="ComicContainer__GeneralData-sc-16s3lk1-4 WRtzq"
+      >
+        Published: 16 / 12 / 2000 
+        <br />
+        Writer: Carl Johnson 
+        <br />
+        Penciler: Rohan Kishibe 
+        <br />
+        Cover Artist: Lionel Messi 
+        <br />
+      </h3>
+      <p
+        class="ComicContainer__Description-sc-16s3lk1-5 ffpJvU"
+        data-testid="comic-description"
+      >
+        He launches missiles, flies and his suit is made of iron, that's why he is called Iron Man. Oh yes, he also shoots lightning from his chest
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

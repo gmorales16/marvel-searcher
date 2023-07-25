@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar render correctly and verify functionalities 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="SearchBar__Search-sc-122nipe-0 hSKwCf"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="Logo Marvel"
+          class="Logo__LogoImage-sc-l2az6b-0 bqezBu"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/2560px-Marvel_Logo.svg.png"
+        />
+      </a>
+      <hr
+        class="SearchBar__HrVertical-sc-122nipe-1 hwJEGW"
+      />
+      <div
+        class="SearchBar__IconSearch-sc-122nipe-3 ieJeCc"
+        data-testid="search-icon"
+      >
+        <svg
+          fill="currentColor"
+          height="30"
+          id="search"
+          opacity="0.5"
+          stroke="currentColor"
+          stroke-width="0"
+          version="1.1"
+          viewBox="0 0 24 24"
+          width="30"
+          x="0px"
+          xmlns="http://www.w3.org/2000/svg"
+          y="0px"
+        >
+          <g>
+            <path
+              d="M20.031,20.79c0.46,0.46,1.17-0.25,0.71-0.7l-3.75-3.76c1.27-1.41,2.04-3.27,2.04-5.31
+		c0-4.39-3.57-7.96-7.96-7.96s-7.96,3.57-7.96,7.96c0,4.39,3.57,7.96,7.96,7.96c1.98,0,3.81-0.73,5.21-1.94L20.031,20.79z
+		 M4.11,11.02c0-3.84,3.13-6.96,6.96-6.96c3.84,0,6.96,3.12,6.96,6.96c0,3.84-3.12,6.96-6.96,6.96C7.24,17.98,4.11,14.86,4.11,11.02
+		z"
+            />
+          </g>
+        </svg>
+      </div>
+      <input
+        class="SearchBar__Input-sc-122nipe-2 hTHJpS"
+        placeholder="Buscar"
+      />
+      <a
+        class="SearchBar__IconStar-sc-122nipe-4 fFuubQ"
+        data-testid="star-icon"
+        href="/favorite"
+      >
+        <svg
+          fill="currentColor"
+          height="50"
+          opacity="0.5"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          width="50"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            id="Star"
+          >
+            <path
+              d="M16.6,20.463a1.5,1.5,0,0,1-.7-.174l-3.666-1.927a.5.5,0,0,0-.464,0L8.1,20.289a1.5,1.5,0,0,1-2.177-1.581l.7-4.082a.5.5,0,0,0-.143-.442L3.516,11.293a1.5,1.5,0,0,1,.832-2.559l4.1-.6a.5.5,0,0,0,.376-.273l1.833-3.714a1.5,1.5,0,0,1,2.69,0l1.833,3.714a.5.5,0,0,0,.376.274l4.1.6a1.5,1.5,0,0,1,.832,2.559l-2.965,2.891a.5.5,0,0,0-.144.442l.7,4.082A1.5,1.5,0,0,1,16.6,20.463Zm-3.9-2.986L16.364,19.4a.5.5,0,0,0,.725-.527l-.7-4.082a1.5,1.5,0,0,1,.432-1.328l2.965-2.89a.5.5,0,0,0-.277-.853l-4.1-.6a1.5,1.5,0,0,1-1.13-.821L12.449,4.594a.516.516,0,0,0-.9,0L9.719,8.308a1.5,1.5,0,0,1-1.13.82l-4.1.6a.5.5,0,0,0-.277.853L7.18,13.468A1.5,1.5,0,0,1,7.611,14.8l-.7,4.082a.5.5,0,0,0,.726.527L11.3,17.477a1.5,1.5,0,0,1,1.4,0Z"
+            />
+          </g>
+        </svg>
+      </a>
+      <hr
+        class="SearchBar__HrVertical-sc-122nipe-1 kfVfgt"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

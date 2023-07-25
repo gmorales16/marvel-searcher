@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalCard renders with correct title and description 1`] = `
+<DocumentFragment>
+  <div
+    class="ModalCard__Card-sc-mkd39d-0 eDWtCQ"
+  >
+    <img
+      alt="Card Image"
+      class="ModalCard__CardImage-sc-mkd39d-1 eXNKxM"
+      src="Hi im mock-url"
+    />
+    <div
+      class="ModalCard__CardContent-sc-mkd39d-2 DKSmK"
+    >
+      <div
+        class="ModalCard__CardHeader-sc-mkd39d-3 fZVkzu"
+      >
+        <h3
+          class="ModalCard__CardTitle-sc-mkd39d-4 fFAfj"
+        >
+          Leon Scott Kennedy
+        </h3>
+        <div
+          data-testid="star-icon"
+        />
+      </div>
+      <p
+        class="ModalCard__CardDescription-sc-mkd39d-5 bpsHBy"
+      >
+        Mock Description
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
