@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FavoriteContainer/> renders FavoriteContainer Component 1`] = `
+<DocumentFragment>
+  <div
+    class="FavoriteContainer__Container-sc-304lf1-0 dspwId"
+    data-testid="favorite-container"
+  >
+    <div
+      class="FavoriteContainer__ContainerCard-sc-304lf1-1 kqdimq"
+      data-testid="favorite-card-container"
+    />
+  </div>
+</DocumentFragment>
+`;

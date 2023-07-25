@@ -50,7 +50,7 @@ const Description = styled.p`
   }
 `;
 
-interface IComicContainer {
+export interface IComicContainer {
   image: string;
   title: string;
   published: string;
@@ -73,14 +73,14 @@ export default function ComicContainer({
     <Container>
       <Image src={image} alt="Comic Image"></Image>
       <InfoContainer>
-        <Title>{title}</Title>
+        <Title data-testid="comic-title">{title}</Title>
         <GeneralData>
           Published: {published} <br />
           Writer: {writer} <br />
           Penciler: {penciler} <br />
           Cover Artist: {artist} <br />
         </GeneralData>
-        <Description>{description}</Description>
+        <Description data-testid="comic-description">{description}</Description>
       </InfoContainer>
     </Container>
   );
