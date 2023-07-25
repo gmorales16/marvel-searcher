@@ -22,8 +22,8 @@ const ContainerCard = styled.div`
 export default function FavoriteContainer() {
   return (
     <>
-      <Container>
-        <ContainerCard></ContainerCard>
+      <Container data-testid="favorite-container">
+        <ContainerCard data-testid="favorite-card-container"></ContainerCard>
       </Container>
     </>
   );

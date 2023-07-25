@@ -92,11 +92,11 @@ export function SearchBar({ setCharacterName }: any) {
       <Search>
         <Logo />
         <HrVertical />
-        <IconSearch>
+        <IconSearch data-testid="search-icon">
           <CiSearch opacity={0.5} size={30} />
         </IconSearch>
         <Input placeholder="Buscar" onChange={handleChange}></Input>
-        <IconStar href="/favorite">
+        <IconStar data-testid="star-icon" href="/favorite">
           <CiStar opacity={0.5} size={50}></CiStar>
         </IconStar>
         <HrVertical $primary />

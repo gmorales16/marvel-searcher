@@ -1,12 +1,11 @@
 import { css, styled } from "styled-components";
 import { CiStar } from "react-icons/ci";
 import { useEffect, useState } from "react";
-interface CardProps {
+export interface CardProps {
   image: string;
   title: string;
   click: any;
   id: string;
-  isSelected: any;
 }
 const CardContainer = styled.div<{ $backgroundImage?: string }>`
   position: relative;
@@ -85,11 +84,15 @@ export function Card({ image, title, click, id }: CardProps) {
   }, [isIdSaved]);
   return (
     <>
-      <CardContainer onClick={click} $backgroundImage={image}>
+      <CardContainer
+        data-testid="card-click-image"
+        onClick={click}
+        $backgroundImage={image}
+      >
         <StarIcon onClick={handleClickStar} $clickIcon={clickIcon}>
           <CiStar size={40}></CiStar>
         </StarIcon>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle data-testid="card-title">{title}</CardTitle>
       </CardContainer>
     </>
   );
