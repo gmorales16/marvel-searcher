@@ -21,12 +21,12 @@ export function useCharactersData(url: string) {
 
   const allCharactersData = useApiCall({
     condition: true,
-    url: `${url}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`,
+    url: `${url}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=8`,
   });
 
   const filteredCharactersData = useApiCall({
     condition: characterName !== "",
-    url: `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${characterName}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`,
+    url: `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${characterName}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=8`,
   });
 
   const charactersData =

@@ -1,4 +1,4 @@
-import { css, styled } from "styled-components";
+import { CardContainer, CardTitle, StarIcon } from "./styledCard";
 import { CiStar } from "react-icons/ci";
 import { useEffect, useState } from "react";
 export interface CardProps {
@@ -8,50 +8,7 @@ export interface CardProps {
   id: string;
   isSelected: boolean;
 }
-const CardContainer = styled.div<{ $backgroundImage?: string }>`
-  position: relative;
-  right: 15rem;
-  width: 356px;
-  height: 480px;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-image: url(${(props) => props.$backgroundImage});
-  border-radius: 5px;
 
-  @media (max-width: 768px) {
-    width: 85%;
-    height: 400px;
-    left: 2rem;
-  }
-`;
-
-const CardTitle = styled.h1`
-  color: #ffffff;
-  position: relative;
-  top: 23rem;
-  text-align: center;
-  font-size: 19px;
-
-  @media (max-width: 768px) {
-    top: 20rem;
-  }
-`;
-
-const StarIcon = styled.button<{ $clickIcon?: boolean }>`
-  border: none;
-  background-color: transparent;
-  color: ${(props) => (props.$clickIcon ? "yellow" : "#ffffff")};
-  position: relative;
-  top: 1rem;
-  left: 18rem;
-  cursor: pointer;
-
-  @media (max-width: 768px) {
-    left: 13rem;
-    position: absolute;
-    top: 1rem;
-  }
-`;
 export function Card({ image, title, click, id }: CardProps) {
   interface FavoriteItem {
     id: string;
@@ -91,7 +48,7 @@ export function Card({ image, title, click, id }: CardProps) {
         $backgroundImage={image}
       >
         <StarIcon onClick={handleClickStar} $clickIcon={clickIcon}>
-          <CiStar size={40}></CiStar>
+          <CiStar strokeWidth="1.5" size={40}></CiStar>
         </StarIcon>
         <CardTitle data-testid="card-title">{title}</CardTitle>
       </CardContainer>
