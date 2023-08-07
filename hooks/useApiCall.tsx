@@ -13,7 +13,7 @@ interface ApiCallParams {
   condition: Condition;
 }
 
-export function useApiCall({ url, condition }: ApiCallParams) {
+const useApiCall = ({ url, condition }: ApiCallParams) => {
   const [data, setData] = useState<any[]>([]);
   const cachedData = useState<{ [key: string]: any[] }>({})[0];
 
@@ -42,4 +42,6 @@ export function useApiCall({ url, condition }: ApiCallParams) {
   }, [url, condition, cachedData]);
 
   return data;
-}
+};
+
+export default useApiCall;

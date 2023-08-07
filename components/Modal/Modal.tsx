@@ -1,53 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import ModalCard from "../ModalCard/ModalCard";
-import { apiContext } from "@/contexts/context";
-
-const ModalWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-`;
-
-const ModalContent = styled.div`
-  width: 500px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-
-  @media (max-width: 768px) {
-    width: 85%;
-    padding: 15px;
-  }
-`;
-
-const ModalTitle = styled.h2`
-  position: relative;
-  bottom: 20px;
-  font-size: 35px;
-  color: #505050;
-`;
-
-const CloseButton = styled.button`
-  position: relative;
-  left: 95%;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-`;
-
-const ModalCardContainer = styled.div`
-  max-height: 400px;
-  overflow-y: auto;
-`;
+import { ApiContext } from "@/contexts/context";
+import {
+  ModalWrapper,
+  ModalContent,
+  ModalTitle,
+  CloseButton,
+  ModalCardContainer,
+} from "./styledModal";
+import { SpinnerContainerModal } from "../SpinnerContainer/styledSpinnerContainer";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface ModalProps {
   onClose: any;
@@ -56,71 +18,77 @@ interface ModalProps {
 }
 
 const Modal = ({ onClose, comicsArray, title }: ModalProps) => {
-  const [comicUrls, setComicUrls] = useState<string[]>([]);
-  const { publicKey, timestamp, hash }: any = useContext(apiContext);
+  const { publicKey, timestamp, hash }: any = useContext(ApiContext);
   const [comicsData, setComicsData] = useState<any[]>([]); // State to store comics data
-
-  // Generate URLs for comics
-  useEffect(() => {
-    const uniqueUrls = Array.from(
-      new Set(
-        comicsArray.map(
-          ({ resourceURI }: { resourceURI: string }) => resourceURI
-        )
-      )
-    );
-
-    const httpsUniqueUrls: string[] = uniqueUrls.map((url: string) =>
-      url.replace("http:", "https:")
-    );
-    setComicUrls(httpsUniqueUrls);
-  }, [comicsArray]);
+  const [loading, setLoading] = useState(true); // Loading state to track data fetching
+  const [idCharacter, setIdCharacter] = useState<number | null>(null);
+  const cachedData = useState<{ [key: string]: any[] }>({})[0];
 
   useEffect(() => {
-    // Function to fetch comic data for a given URL
-    const fetchComicData = async (url: string) => {
-      try {
-        const response = await fetch(
-          `${url}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+    const item = localStorage.getItem("idCharacter");
+    if (item !== null) {
+      const numValue = +item; // Convert the value to a number
+      if (!isNaN(numValue)) {
+        setIdCharacter(numValue);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const baseURL = "https://gateway.marvel.com:443/v1/public/characters";
+    const fullURL = `${baseURL}/${idCharacter}/comics?&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+
+    const fetchData = async () => {
+      if (idCharacter) {
+        if (cachedData[fullURL]) {
+          setComicsData(cachedData[fullURL]);
+        } else {
+          const response = await fetch(fullURL);
+          const jsonData = await response.json();
+          setComicsData(jsonData.data.results);
+          cachedData[fullURL] = jsonData.data.results;
         }
-        const jsonData = await response.json();
-        return jsonData.data.results[0];
-      } catch (error) {
-        console.error("Error fetching comic data:", error);
-        return null;
+      } else {
+        setComicsData([]);
       }
     };
 
-    // Fetch comic data for all URLs in comicUrls
-    Promise.all(comicUrls.map(fetchComicData))
-      .then((data) => {
-        // Filter out any null values (in case of error) and set the comicsData state
-        setComicsData(data.filter((item) => item !== null));
-      })
-      .catch((error) => {
-        console.error("Error fetching comic data:", error);
-      });
-  }, [comicUrls, publicKey, timestamp, hash]);
+    fetchData();
+  }, [idCharacter]);
+
+  useEffect(() => {
+    if (comicsData.length > 0) {
+      setLoading(false);
+    }
+  }, [comicsData]);
 
   return (
     <ModalWrapper>
       <ModalContent>
         <CloseButton onClick={onClose}>X</CloseButton>
         <ModalTitle>{title}</ModalTitle>
-        <ModalCardContainer>
-          {comicsData.map((comic) => (
-            <ModalCard
-              key={comic.id}
-              url={comic.thumbnail.path + "." + comic.thumbnail.extension}
-              title={comic.title}
-              description={comic.description}
-              id={comic.id}
+        {loading ? (
+          <SpinnerContainerModal>
+            <ClipLoader
+              color="#ff0000"
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
             />
-          ))}
-        </ModalCardContainer>
+          </SpinnerContainerModal>
+        ) : (
+          <ModalCardContainer>
+            {comicsData.map((comic) => (
+              <ModalCard
+                key={comic.id}
+                url={comic.thumbnail.path + "." + comic.thumbnail.extension}
+                title={comic.title}
+                description={comic.description}
+                id={comic.id}
+              />
+            ))}
+          </ModalCardContainer>
+        )}
       </ModalContent>
     </ModalWrapper>
   );
