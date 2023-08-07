@@ -1,3 +1,5 @@
+"use client";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardImage,
@@ -15,17 +17,13 @@ interface ModalCardProps {
   id: Number;
 }
 
-export default function ModalCard({
-  url,
-  title,
-  description,
-  id,
-}: ModalCardProps) {
+const ModalCard = ({ url, title, description, id }: ModalCardProps) => {
   // Set ID Comic in LocalStorage
+  const router = useRouter();
 
   const handleClickCard = () => {
     localStorage.setItem("idComic", String(id));
-    window.location.href = `/comic`;
+    router.push("/comic");
   };
   return (
     <Card onClick={handleClickCard}>
@@ -39,4 +37,6 @@ export default function ModalCard({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default ModalCard;

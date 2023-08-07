@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { SearchBar } from "../components/SearchBar/SearchBar";
 import {
   MainContainer,
   ContainerCard,
 } from "../components/Favorite/styledFavorite";
-import { Card } from "@/components/Card/Card";
+import SearchBar from "../components/SearchBar/SearchBar";
+import Card from "@/components/Card/Card";
 import "../app/globals.css";
 
 export default function Favorite() {

@@ -1,6 +1,6 @@
 import { Container, ContainerCard } from "./styledFavoriteContainer";
 
-export default function FavoriteContainer() {
+const FavoriteContainer = () => {
   return (
     <>
       <Container data-testid="favorite-container">
@@ -8,4 +8,6 @@ export default function FavoriteContainer() {
       </Container>
     </>
   );
-}
+};
+
+export default FavoriteContainer;

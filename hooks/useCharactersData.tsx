@@ -1,8 +1,8 @@
-import { useApiCall } from "./useApiCall";
-import { apiContext, nameCharacterContext } from "../contexts/context";
-import { Card } from "../components/Card/Card";
+import useApiCall from "./useApiCall";
+import { ApiContext, NameCharacterContext } from "../contexts/context";
+import Card from "../components/Card/Card";
 
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
 interface IFilteredCharacters {
   comics: IFilteredCharactersComic;
@@ -13,15 +13,16 @@ interface IFilteredCharactersComic {
   items: [];
 }
 
-export function useCharactersData(url: string) {
-  const { publicKey, timestamp, hash }: any = useContext(apiContext);
-  const characterName = useContext(nameCharacterContext);
+const useCharactersData = (url: string) => {
+  const { publicKey, timestamp, hash }: any = useContext(ApiContext);
+  const characterName = useContext(NameCharacterContext);
   const [dataFilter, setDataFilter] = useState<[]>([]);
   const [nameCharacterFilter, setNameCharacterFilter] = useState("");
+  const randomCharacter = useMemo(() => Math.floor(Math.random() * 1562), []);
 
   const allCharactersData = useApiCall({
     condition: true,
-    url: `${url}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=8`,
+    url: `${url}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&offset=${randomCharacter}&limit=8`,
   });
 
   const filteredCharactersData = useApiCall({
@@ -46,6 +47,7 @@ export function useCharactersData(url: string) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleClickModal = (id: any) => {
+    localStorage.setItem("idCharacter", id);
     setModalOpen(true);
     const filteredCharacters: IFilteredCharacters[] = charactersData.filter(
       (character: any) => {
@@ -69,4 +71,6 @@ export function useCharactersData(url: string) {
     dataFilter,
     nameCharacterFilter,
   };
-}
+};
+
+export default useCharactersData;
