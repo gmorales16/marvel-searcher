@@ -3,5 +3,4 @@ const apiUtils = {
   timestamp: process.env.NEXT_PUBLIC_TIMESTAMP,
   hash: process.env.NEXT_PUBLIC_HASH,
 };
-
 export default apiUtils;

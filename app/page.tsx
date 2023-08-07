@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function Home() {
   const { publicKey, timestamp, hash } = apiUtils;
   const [characterName, setCharacterName] = useState("");
+
   return (
     <>
       <NameCharacterContext.Provider value={characterName}>
