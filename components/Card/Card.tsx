@@ -9,7 +9,7 @@ export interface CardProps {
   isSelected: boolean;
 }
 
-export function Card({ image, title, click, id }: CardProps) {
+const Card = ({ image, title, click, id }: CardProps) => {
   interface FavoriteItem {
     id: string;
     image: string;
@@ -21,7 +21,8 @@ export function Card({ image, title, click, id }: CardProps) {
   );
   const [clickIcon, setClickIcon] = useState(isIdSaved);
 
-  const handleClickStar = () => {
+  const handleClickStar = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setClickIcon(!clickIcon);
     const favoriteItems: FavoriteItem[] = JSON.parse(
       localStorage.getItem("favorite") || "[]"
@@ -54,4 +55,6 @@ export function Card({ image, title, click, id }: CardProps) {
       </CardContainer>
     </>
   );
-}
+};
+
+export default Card;

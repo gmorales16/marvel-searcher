@@ -6,6 +6,7 @@ const Card = styled.div`
   max-width: 600px;
   margin: 10px;
   padding: 10px;
+  cursor: pointer;
 
   @media (min-width: 768px) {
     flex-direction: row;

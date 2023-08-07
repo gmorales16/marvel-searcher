@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { SearchBar } from "../components/SearchBar/SearchBar";
+import SearchBar from "../components/SearchBar/SearchBar";
 import ComicContainer from "../components/ComicContainer/ComicContainer";
 import "../app/globals.css";
-import { useApiCall } from "@/hooks/useApiCall";
+import useApiCall from "@/hooks/useApiCall";
+import ClipLoader from "react-spinners/ClipLoader";
+import { SpinnerContainer } from "../components/SpinnerContainer/styledSpinnerContainer";
 
 import formatDateToCustomFormat from "../utils/formatDateutils";
 
 export default function Comic() {
   const [searchComic, setSearchComic] = useState("");
   const [id, setId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true); // Loading state to track data fetching
 
   useEffect(() => {
     // Perform localStorage action
@@ -20,6 +23,18 @@ export default function Comic() {
     condition: id !== null,
     url: `https://gateway.marvel.com/v1/public/comics/${id}?ts=1000&apikey=2b13a686a43c563e99006fd2a8af1363&hash=8daa848a6beef96a71f7b1964a6f2a52`,
   });
+
+  useEffect(() => {
+    // Set loading to true when comicData changes
+    setLoading(true);
+  }, [comicData]);
+
+  useEffect(() => {
+    // Check if comicData is available to set loading to false
+    if (comicData) {
+      setLoading(false);
+    }
+  }, [comicData]);
 
   // Filter creators based on their roles
   let writer = "";
@@ -37,7 +52,7 @@ export default function Comic() {
     });
   }
 
-  //Date Formatter Custom
+  // Date Formatter Custom
   let dateWithTimezone = null;
 
   if (comicData && comicData.modified) {
@@ -46,22 +61,39 @@ export default function Comic() {
 
   return (
     <>
-      <SearchBar setCharacterName={setSearchComic}></SearchBar>
-      {comicData ? (
-        <ComicContainer
-          key={comicData.resourceURI} // Use a unique key for each ComicContainer
-          image={comicData.thumbnail.path + "." + comicData.thumbnail.extension}
-          title={comicData.title}
-          published={
-            dateWithTimezone ? formatDateToCustomFormat(dateWithTimezone) : ""
-          }
-          writer={writer}
-          penciler={penciler}
-          artist={coverArtist}
-          description={comicData.description}
-        />
+      {loading ? (
+        // Show the spinner while data is being fetched
+        <SpinnerContainer>
+          <ClipLoader
+            color="#ff0000"
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </SpinnerContainer>
       ) : (
-        <div></div>
+        // Render the ComicContainer once data is available
+        <>
+          <SearchBar setCharacterName={setSearchComic} />
+          {comicData && (
+            <ComicContainer
+              key={comicData.resourceURI} // Use a unique key for each ComicContainer
+              image={
+                comicData.thumbnail.path + "." + comicData.thumbnail.extension
+              }
+              title={comicData.title}
+              published={
+                dateWithTimezone
+                  ? formatDateToCustomFormat(dateWithTimezone)
+                  : ""
+              }
+              writer={writer}
+              penciler={penciler}
+              artist={coverArtist}
+              description={comicData.description}
+            />
+          )}
+        </>
       )}
     </>
   );

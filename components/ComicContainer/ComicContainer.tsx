@@ -17,7 +17,7 @@ export interface IComicContainer {
   description: string;
 }
 
-export default function ComicContainer({
+const ComicContainer = ({
   image,
   title,
   published,
@@ -25,7 +25,7 @@ export default function ComicContainer({
   penciler,
   artist,
   description,
-}: IComicContainer) {
+}: IComicContainer) => {
   return (
     <Container>
       <Image src={image} alt="Comic Image"></Image>
@@ -41,4 +41,6 @@ export default function ComicContainer({
       </InfoContainer>
     </Container>
   );
-}
+};
+
+export default ComicContainer;

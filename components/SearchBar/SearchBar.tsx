@@ -9,7 +9,7 @@ import {
   IconStar,
 } from "./styledSearchBar";
 
-export function SearchBar({ setCharacterName }: any) {
+const SearchBar = ({ setCharacterName }: any) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -44,4 +44,6 @@ export function SearchBar({ setCharacterName }: any) {
       </Search>
     </div>
   );
-}
+};
+
+export default SearchBar;
